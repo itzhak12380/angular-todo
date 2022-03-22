@@ -9,12 +9,14 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { HeaderComponent } from './components/header/header.component';
-import {ModuleModule} from './module/module.module'
+import {ModuleModule} from './module/module.module';
+import { TodoComponent } from './components/todo/todo.component'
 @NgModule({
   declarations: [
     AppComponent,
     TodoListComponent,
-    HeaderComponent
+    HeaderComponent,
+    TodoComponent
   ],
   imports: [
     BrowserModule,

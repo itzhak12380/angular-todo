@@ -3,16 +3,17 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { ITodo } from '../models/todo.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TodoService {
-  private todo:ITodo[] = [
+  private todo: ITodo[] = [
     {
       title: "You'll Find Out",
       description: 'Displaced spiral fracture of shaft of unsp fibula, sequela',
       isCompleted: false,
       isArchived: true,
       endDate: '10/13/2021',
+      selected: true,
     },
     {
       title: 'Judy Berlin',
@@ -20,6 +21,7 @@ export class TodoService {
       isCompleted: true,
       isArchived: false,
       endDate: '3/27/2021',
+      selected: false,
     },
     {
       title: 'Last Days of Pompeii, The',
@@ -27,6 +29,7 @@ export class TodoService {
       isCompleted: false,
       isArchived: true,
       endDate: '12/17/2021',
+      selected: false,
     },
     {
       title: 'Black or White',
@@ -34,13 +37,16 @@ export class TodoService {
       isCompleted: true,
       isArchived: false,
       endDate: '10/8/2021',
+      selected: false,
     },
     {
       title: 'Mac & Devin Go to High School',
-      description: 'Subluxation of proximal interphaln joint of l rng fngr, init',
+      description:
+        'Subluxation of proximal interphaln joint of l rng fngr, init',
       isCompleted: true,
       isArchived: false,
       endDate: '4/27/2021',
+      selected: false,
     },
     {
       title: 'Divorce, Le',
@@ -48,40 +54,24 @@ export class TodoService {
       isCompleted: true,
       isArchived: true,
       endDate: '4/7/2021',
-    },
-    {
-      title: 'Kid from Brooklyn, The',
-      description: 'Strain of musc/fasc/tend at forarm lv, right arm, sequela',
-      isCompleted: true,
-      isArchived: true,
-      endDate: '3/8/2022',
-    },
-    {
-      title: 'Teenage',
-      description: 'Traumatic amputation of shoulder and upper arm, level unsp',
-      isCompleted: true,
-      isArchived: true,
-      endDate: '3/17/2022',
-    },
-    {
-      title: 'Thérèse: The Story of Saint Thérèse of Lisieux',
-      description: 'Underdosing of cocaine, sequela',
-      isCompleted: true,
-      isArchived: true,
-      endDate: '2/27/2022',
-    },
-    {
-      title: 'Trouble with Girls, The',
-      description: 'Influenza due to other identified influenza virus',
-      isCompleted: true,
-      isArchived: true,
-      endDate: '7/5/2021',
+
+      selected: false,
     },
   ];
-  constructor() { }
-  private todoSubject:BehaviorSubject<Array<ITodo>> = new BehaviorSubject(this.todo)
-
-  public getTodo():Observable<Array<ITodo>>{
-      return this.todoSubject.asObservable()
+  constructor() {}
+  private todoSubject: BehaviorSubject<Array<ITodo>> = new BehaviorSubject(
+    this.todo
+  );
+  public singaleTodoSubject: BehaviorSubject<ITodo> = new BehaviorSubject(
+    this.todo[0]
+  );
+  public getTodo(): Observable<Array<ITodo>> {
+    return this.todoSubject.asObservable();
+  }
+  public getSelectedTodo(): Observable<ITodo> {
+    return this.singaleTodoSubject.asObservable();
+  }
+  public chooseSelectedTodo(todo: ITodo): void {
+    this.singaleTodoSubject.next(todo);
   }
 }

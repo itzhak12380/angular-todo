@@ -9,6 +9,7 @@ import {ITodo} from '../../models/todo.interface'
 })
 export class TodoListComponent implements OnInit, OnDestroy {
   public todos:Array<ITodo> = []
+  public todo:ITodo ;
   constructor(private todoService: TodoService) {}
   private subscribe: Subscription = new Subscription();
   ngOnInit(): void {
@@ -16,10 +17,19 @@ export class TodoListComponent implements OnInit, OnDestroy {
       this.todoService.getTodo().subscribe((data) => {
         console.log(data);
         this.todos = data
-      })
+      }),
     );
   }
   ngOnDestroy(): void {
     this.subscribe.unsubscribe();
+  }
+  public setSelectedTodo(todo,index){
+    this.todos.forEach(item =>{
+      if(item.title !== this.todos[index].title){
+        item.selected = false
+      }
+    })
+    this.todoService.chooseSelectedTodo(todo)
+    this.todos[index].selected = true
   }
 }
