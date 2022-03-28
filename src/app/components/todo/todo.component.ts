@@ -19,11 +19,18 @@ export class TodoComponent implements OnInit,OnDestroy,OnChanges {
       })
     )  
   }
+
   ngOnDestroy(): void {
     
   }
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
-    
+  }
+
+  onComplete(todo:ITodo){
+    todo.isCompleted = true
+  }
+  onArchive(){
+    this.todo.isArchived = true
   }
 }

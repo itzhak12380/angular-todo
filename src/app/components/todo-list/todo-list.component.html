@@ -1,6 +1,6 @@
 <div class="todoList">
-  <div class="todo-wrap" *ngFor="let item of todos , let i = index">
-    <mat-card (click)="setSelectedTodo(item,i)" [ngClass]="{selected: item.selected}">
+  <div class="todo-wrap" *ngFor="let item of todos , let i = index" >
+    <mat-card (click)="setSelectedTodo(item,i)" [ngClass]="{selected: item.selected,complete:item.isCompleted}" *ngIf="!item.isArchived">
       <mat-card-title>{{ item.title }}</mat-card-title>
       <mat-card-subtitle>{{ item.description }}</mat-card-subtitle>
     </mat-card>
